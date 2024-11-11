@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Yandex test — Тестовое задание по frontend">
+    <title>Drag-and-Drop Магазин</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <main>
+        <h1 class="sr-only">Drag-and-Drop Store</h1>
+
+        <div class="banner">
+            <!-- Секция магазина -->
+            <section class="store" aria-labelledby="store-title">
+                <h2 id="store-title" class="sr-only">Товары на полке</h2>
+                <img src="assets/img/store.svg" class="store-bg" width="211" height="431" alt="Фон магазина">
+                
+                <ul class="shelf">
+                    <li id="product1" class="product bottle">
+                        <img src="assets/img/bottle.svg" width="37" height="124" alt="Бутылка">
+                    </li>
+                    <li id="product2" class="product bottle2">
+                        <img src="assets/img/bottle2.svg" width="37" height="91" alt="Бутылка 2">
+                    </li>
+                    <li id="product3" class="product jar">
+                        <img src="assets/img/jar.svg" width="46" height="41" alt="Банка">
+                    </li>
+                    <li id="product4" class="product cheese">
+                        <img src="assets/img/cheese.svg" width="36" height="34" alt="Сыр">
+                    </li>
+                    <li id="product5" class="product meat">
+                        <img src="assets/img/meat.svg" width="49" height="49" alt="Мясо">
+                    </li>
+                    <li id="product6" class="product chicken">
+                        <img src="assets/img/chicken.svg" width="54" height="50" alt="Курица">
+                    </li>
+                    <li id="product7" class="product seasoning">
+                        <img src="assets/img/seasoning.svg" width="76" height="47" alt="Приправа">
+                    </li>
+                    <li id="product8" class="product pineapple">
+                        <img src="assets/img/pineapple.svg" width="35" height="74" alt="Ананас">
+                    </li>
+                    <li id="product9" class="product bananas">
+                        <img src="assets/img/bananas.svg" width="47" height="47" alt="Банан">
+                    </li>
+                    <li id="product10" class="product apple">
+                        <img src="assets/img/apple.svg" width="31" height="36" alt="Яблоко">
+                    </li>
+                    <li id="product11" class="product salad">
+                        <img src="assets/img/salad.svg" width="62" height="51" alt="Салат">
+                    </li>
+                </ul>
+            </section>
+    
+            <!-- Секция корзины -->
+            <section class="cart" aria-labelledby="cart-title">
+                <h2 id="cart-title" class="sr-only">Корзина для покупок</h2>
+                <img src="assets/img/cart.svg" width="276" height="325" alt="Корзина" class="cart-bg" aria-hidden="true">
+                
+                <ul class="cart-items" aria-live="polite">
+                    <!-- Здесь будут добавляться товары -->
+                </ul>
+                
+                <a class="checkout hidden" href="https://github.com/arshtnkv" target="_blank" aria-label="Оплатить корзину">Оплатить корзину</a>
+            </section>
+        </div>
+    </main>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

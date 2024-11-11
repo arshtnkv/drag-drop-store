@@ -1,0 +1,353 @@
+/*
+* Test project for yandex
+* by https://github.com/arshtnkv
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
+/* var */
+:root {
+  /* colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --alice-blue: #f0f4f8;
+  --gold: #ffd700;
+  --golden-yellow: #fce000;
+
+  /* transitions */
+  --transition-ease-in-out: 0.3s ease-in-out;
+  --transition-flyToCart: 0.6s ease-in-out forwards;
+
+  /* box-shadows */
+  --box-shadow-default: 0 0 10px rgba(0, 0, 0, 0.2);
+  --box-shadow-hoverWave-start: 0 8px 10px rgba(252, 224, 0, 0.3), 0 0 0 0 rgba(252, 224, 0, 0.2), 0 0 0 0 rgba(252, 224, 0, 0.2);
+  --box-shadow-hoverWave-middle: 0 8px 10px rgba(252, 224, 0, 0.3), 0 0 0 15px rgba(252, 224, 0, 0.2), 0 0 0 0 rgba(252, 224, 0, 0.2);
+  --box-shadow-hoverWave-end: 0 8px 10px rgba(252, 224, 0, 0.3), 0 0 0 30px rgba(252, 224, 0, 0), 0 0 0 40px rgba(252, 224, 0, 0);
+}
+
+/* reboot */
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--alice-blue);
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+a {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/* utils */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+          clip-path: inset(100%);
+}
+
+.hidden {
+  display: none;
+}
+
+/* animation */
+@-webkit-keyframes hoverWave {
+  0% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-start);
+            box-shadow: var(--box-shadow-hoverWave-start);
+  }
+  40% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-middle);
+            box-shadow: var(--box-shadow-hoverWave-middle);
+  }
+  80% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-end);
+            box-shadow: var(--box-shadow-hoverWave-end);
+  }
+  100% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-end);
+            box-shadow: var(--box-shadow-hoverWave-end);
+  }
+}
+@keyframes hoverWave {
+  0% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-start);
+            box-shadow: var(--box-shadow-hoverWave-start);
+  }
+  40% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-middle);
+            box-shadow: var(--box-shadow-hoverWave-middle);
+  }
+  80% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-end);
+            box-shadow: var(--box-shadow-hoverWave-end);
+  }
+  100% {
+    -webkit-box-shadow: var(--box-shadow-hoverWave-end);
+            box-shadow: var(--box-shadow-hoverWave-end);
+  }
+}
+
+@-webkit-keyframes flyToCart {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.3) translate(calc(50vw - 50%), calc(40vh - 50%));
+            transform: scale(0.3) translate(calc(50vw - 50%), calc(40vh - 50%));
+  }
+}
+
+@keyframes flyToCart {
+  0% {
+    opacity: 1;
+    -webkit-transform: scale(1) translate(0, 0);
+            transform: scale(1) translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(0.3) translate(calc(50vw - 50%), calc(40vh - 50%));
+            transform: scale(0.3) translate(calc(50vw - 50%), calc(40vh - 50%));
+  }
+}
+
+.flying {
+  position: fixed;
+  pointer-events: none;
+  -webkit-animation: flyToCart var(--transition-flyToCart);
+          animation: flyToCart var(--transition-flyToCart);
+  z-index: 10;
+}
+
+/* banner */
+.banner {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  padding: 28px 44.24px 0;
+  margin: 0 auto;
+  margin-top: auto;
+}
+
+/* store */
+.store {
+  position: relative;
+}
+
+.store-bg {
+  z-index: 0;
+}
+
+.shelf {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.product {
+  position: absolute;
+  cursor: -webkit-grab;
+          cursor: grab;
+  z-index: 1;
+}
+
+.shelf .locked {
+  pointer-events: none;
+}
+
+/* cart */
+.cart {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: -92px;
+}
+
+.cart-bg {
+  width: 131%;
+  z-index: 1;
+}
+
+.cart-items {
+  position: absolute;
+  top: -5%;
+  left: 13%;
+  width: 95%;
+  height: 82%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-radius: 15px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.cart-items li {
+  max-width: 27%;
+  width: 100%;
+  z-index: -1;
+  -webkit-animation: drop var(--transition-ease-in-out);
+          animation: drop var(--transition-ease-in-out);
+}
+
+.checkout {
+  cursor: pointer;
+  position: absolute;
+  bottom: 20px;
+  padding: 19px 25.4px;
+  margin-top: 10px;
+  color: var(--color-black);
+  background-color: var(--golden-yellow);
+  border: none;
+  border-radius: 16px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  -webkit-transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+  transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+  -o-transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, -webkit-transform 0.3s ease;
+  -webkit-animation: hoverWave linear 1s infinite;
+          animation: hoverWave linear 1s infinite;
+  z-index: 2;
+}
+.checkout:hover {
+  -webkit-animation: none;
+          animation: none;
+  background-color: #ffea00;
+  -webkit-transform: scale(1.05);
+      -ms-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+  transition: background-color 0.3s ease, -webkit-transform 0.3s ease;
+  -o-transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, background-color 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+/*image sizes*/
+.bottle {
+  width: 17.6%;
+  top: -0.9%;
+  left: 10%;
+}
+
+.bottle2 {
+  width: 17.6%;
+  top: 7%;
+  left: 30.5%;
+}
+
+.jar {
+  width: 21.8%;
+  top: 18.5%;
+  right: 30%;
+}
+
+.cheese {
+  width: 17.1%;
+  top: 20.5%;
+  right: 8%;
+}
+
+.meat {
+  width: 23.3%;
+  top: 39%;
+  left: 4%;
+}
+
+.chicken {
+  width: 30%;
+  top: 39%;
+  left: 28%;
+}
+
+.seasoning {
+  width: 36%;
+  top: 40.5%;
+  right: 3%;
+}
+
+.pineapple {
+  width: 16.6%;
+  top: 54.5%;
+  left: 6%;
+}
+
+.bananas {
+  width: 22.3%;
+  top: 61%;
+  left: 27%;
+}
+
+.apple {
+  width: 14.7%;
+  top: 63.5%;
+  right: 31%;
+}
+
+.salad {
+  width: 29.4%;
+  top: 61%;
+  right: -3%;
+}
